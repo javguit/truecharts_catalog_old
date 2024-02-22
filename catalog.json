@@ -29,7 +29,7 @@
             "tags": [],
             "screenshots": [],
             "sources": [
-                "https://github.com/javguit/truecharts_old/stable/external-service"
+                "https://github.com/javguit/truecharts_charts_old/tree/main/charts/stable/external-service"
             ],
             "icon_url": "https://truecharts.org/img/hotlink-ok/chart-icons/external-service.png"
         }
