@@ -1,0 +1,29 @@
+image:
+  repository: ghcr.io/onedr0p/nzbget
+  pullPolicy: IfNotPresent
+  tag: v21.1@sha256:14c199509abe449de183a4722e9a87ad25b2a6aafddc258483e6d006ae864ca6
+service:
+  main:
+    ports:
+      main:
+        port: 10057
+        targetPort: 6789
+persistence:
+  config:
+    enabled: true
+    mountPath: "/config"
+portal:
+  open:
+    enabled: true
+workload:
+  main:
+    podSpec:
+      containers:
+        main:
+          probes:
+            liveness:
+              enabled: false
+            readiness:
+              enabled: false
+            startup:
+              enabled: false

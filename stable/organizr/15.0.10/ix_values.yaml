@@ -1,0 +1,26 @@
+image:
+  repository: organizr/organizr
+  pullPolicy: Always
+  tag: latest@sha256:2a4216367bac341fe82c72b9d622010cbe37798ea86ba4090667d99fa3fe2024
+service:
+  main:
+    ports:
+      main:
+        port: 10022
+        targetPort: 80
+persistence:
+  config:
+    enabled: true
+    mountPath: "/config"
+  data:
+    enabled: true
+    mountPath: "/data"
+portal:
+  open:
+    enabled: true
+securityContext:
+  container:
+    readOnlyRootFilesystem: false
+    runAsNonRoot: false
+    runAsUser: 0
+    runAsGroup: 0

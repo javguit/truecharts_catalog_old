@@ -1,0 +1,64 @@
+image:
+  repository: jacobalberty/unifi
+  tag: v7.5.176@sha256:d1c9a0f7af6f2ef7b080b604a1d6d9909238930bf6dd95bc60c5ef95a5003f7e
+  pullPolicy: IfNotPresent
+service:
+  main:
+    ports:
+      main:
+        protocol: https
+        port: 8443
+        targetPort: 8443
+  comm:
+    enabled: true
+    ports:
+      comm:
+        enabled: true
+        port: 8080
+        targetPort: 8080
+  stun:
+    enabled: true
+    ports:
+      stun:
+        enabled: true
+        port: 3478
+        targetPort: 3478
+        protocol: udp
+  speedtest:
+    enabled: true
+    ports:
+      speedtest:
+        enabled: true
+        port: 6789
+        targetPort: 6789
+  guestportal:
+    enabled: true
+    ports:
+      web:
+        enabled: true
+        port: 8880
+        targetPort: 8880
+        protocol: http
+      websecure:
+        enabled: true
+        port: 8843
+        targetPort: 8843
+        protocol: https
+persistence:
+  config:
+    enabled: true
+    mountPath: "/unifi"
+portal:
+  open:
+    enabled: true
+securityContext:
+  container:
+    readOnlyRootFilesystem: false
+    runAsGroup: 999
+    runAsUser: 999
+workload:
+  main:
+    podSpec:
+      containers:
+        main:
+          env: {}

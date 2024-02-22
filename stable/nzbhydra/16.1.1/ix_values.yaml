@@ -1,0 +1,59 @@
+image:
+  repository: ghcr.io/geek-cookbook/nzbhydra2
+  pullPolicy: IfNotPresent
+  tag: 5.3.2@sha256:4883331086c8b0c7d3d034c4dd922417cecd5b0ad7f58db4f4cca842121a3dd4
+service:
+  main:
+    ports:
+      main:
+        port: 5076
+        targetPort: 5076
+persistence:
+  config:
+    enabled: true
+    mountPath: "/config"
+portal:
+  open:
+    enabled: true
+securityContext:
+  container:
+    readOnlyRootFilesystem: false
+workload:
+  main:
+    podSpec:
+      containers:
+        main:
+          probes:
+            liveness:
+              custom: true
+              enabled: true
+              spec:
+                failureThreshold: 5
+                httpGet:
+                  path: /actuator/health/livenessState
+                  port: main
+                initialDelaySeconds: 30
+                periodSeconds: 10
+                timeoutSeconds: 10
+            readiness:
+              custom: true
+              enabled: true
+              spec:
+                failureThreshold: 5
+                httpGet:
+                  path: /actuator/health/readinessState
+                  port: main
+                initialDelaySeconds: 30
+                periodSeconds: 10
+                timeoutSeconds: 10
+            startup:
+              custom: true
+              enabled: true
+              spec:
+                failureThreshold: 5
+                httpGet:
+                  path: /actuator/health/readinessState
+                  port: main
+                initialDelaySeconds: 30
+                periodSeconds: 10
+                timeoutSeconds: 10

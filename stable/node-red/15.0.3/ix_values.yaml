@@ -1,0 +1,24 @@
+image:
+  repository: tccr.io/truecharts/node-red
+  pullPolicy: IfNotPresent
+  tag: v3.1.0@sha256:182a618f580a5ab0d16c6f4ed69675473db3985095bd891ae190d2284a0e5250
+service:
+  main:
+    ports:
+      main:
+        port: 1880
+        targetPort: 1880
+persistence:
+  data:
+    enabled: true
+    mountPath: "/data"
+portal:
+  open:
+    enabled: true
+
+workload:
+  main:
+    podSpec:
+      containers:
+        main:
+          env: {}

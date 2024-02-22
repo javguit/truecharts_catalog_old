@@ -1,0 +1,74 @@
+image:
+  repository: ghcr.io/goofball222/unifi
+  tag: v7.5.187@sha256:742313ec48b1ab5008d74041114a0aec4b4c18cdff26f2967ed6e98d3b97cb51
+  pullPolicy: IfNotPresent
+service:
+  main:
+    ports:
+      main:
+        protocol: https
+        port: 8443
+        targetPort: 8443
+  comm:
+    enabled: true
+    ports:
+      comm:
+        enabled: true
+        port: 8080
+        targetPort: 8080
+  stun:
+    enabled: true
+    ports:
+      stun:
+        enabled: true
+        port: 3478
+        targetPort: 3478
+        protocol: udp
+  speedtest:
+    enabled: true
+    ports:
+      speedtest:
+        enabled: true
+        port: 6789
+        targetPort: 6789
+  guestportal:
+    enabled: true
+    ports:
+      web:
+        enabled: true
+        port: 8880
+        targetPort: 8880
+        protocol: http
+      websecure:
+        enabled: true
+        port: 8843
+        targetPort: 8843
+        protocol: https
+persistence:
+  config:
+    enabled: true
+    mountPath: "/usr/lib/unifi/olddata"
+  certs:
+    enabled: true
+    mountPath: "/usr/lib/unifi/data"
+  logs:
+    enabled: true
+    mountPath: "/usr/lib/unifi/logs"
+    type: "emptyDir"
+  certs:
+    enabled: true
+    mountPath: "/usr/lib/unifi/cert"
+portal:
+  open:
+    enabled: true
+securityContext:
+  container:
+    readOnlyRootFilesystem: false
+    runAsGroup: 999
+    runAsUser: 999
+workload:
+  main:
+    podSpec:
+      containers:
+        main:
+          env: {}

@@ -1,0 +1,32 @@
+image:
+  repository: tccr.io/truecharts/ombi
+  pullPolicy: IfNotPresent
+  tag: v4.43.6@sha256:26f548578845690138fd114b782d4904f39416cfbda8ee4aeb02d5057a90d656
+service:
+  main:
+    ports:
+      main:
+        port: 3579
+        targetPort: 3579
+persistence:
+  config:
+    enabled: true
+    mountPath: "/config"
+# Enabled mariadb
+# ... for more options see https://github.com/tccr.io/truecharts/charts/tree/master/tccr.io/truecharts/mariadb
+mariadb:
+  enabled: false
+  architecture: standalone
+  auth:
+    database: ombi
+    username: ombi
+    password: ombi
+  primary:
+    persistence:
+      enabled: false
+portal:
+  open:
+    enabled: true
+securityContext:
+  container:
+    readOnlyRootFilesystem: false

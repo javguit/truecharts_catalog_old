@@ -1,0 +1,35 @@
+image:
+  repository: tccr.io/truecharts/navidrome
+  pullPolicy: IfNotPresent
+  tag: v0.50.0@sha256:fb896cf4a1333981eb967cefa7b70d1fb502b40292ae35a91d23bb296db06883
+
+workload:
+  main:
+    podSpec:
+      containers:
+        main:
+          env:
+            ND_MUSICFOLDER: /music
+            ND_SCANSCHEDULE: "@every 15m"
+            ND_LOGLEVEL: info
+            ND_SESSIONTIMEOUT: 24h
+            ND_ENABLETRANSCODINGCONFIG: false
+
+service:
+  main:
+    ports:
+      main:
+        port: 4533
+        targetPort: 4533
+
+persistence:
+  data:
+    enabled: true
+    mountPath: /data
+  music:
+    enabled: true
+    mountPath: /music
+
+portal:
+  open:
+    enabled: true

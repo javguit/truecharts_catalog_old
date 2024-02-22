@@ -1,0 +1,33 @@
+image:
+  repository: vexorian/dizquetv
+  pullPolicy: IfNotPresent
+  tag: 1.5.1@sha256:7c5648342a608964fdd5a60d1b105baba707ea3032c600f8e7945eaddb16229a
+service:
+  main:
+    ports:
+      main:
+        port: 10071
+        targetPort: 8000
+workload:
+  main:
+    podSpec:
+      containers:
+        main:
+          probes:
+            liveness:
+              type: http
+              path: /
+            readiness:
+              type: http
+              path: /
+            startup:
+              type: http
+              path: /
+          env: {}
+persistence:
+  config:
+    enabled: true
+    mountPath: /home/node/app/.dizquetv
+portal:
+  open:
+    enabled: true
